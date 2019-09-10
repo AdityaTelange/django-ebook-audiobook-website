@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load static %}
+<h3>{{ audiobook.name }}</h3>
+
+{% for audiobook_part in audiobook.book_part.all %}
+
+<div class="card" oncontextmenu="return false;">
+    <h5 class="card-header">{{ audiobook_part.audio_file.name }}</h5>
+    <audio controls>
+        <source src="{{ audiobook_part.audio_file.url }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+{% if not forloop.last %}
+<hr>
+{% endif %}
+{% endfor %}
+{% endblock content %}

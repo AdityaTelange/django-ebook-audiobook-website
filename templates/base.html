@@ -1,0 +1,93 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <title>BookTime</title></head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light"><a class="navbar-brand" href="/">BookTime</a>
+    <button class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button"><span
+            class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item {% if request.path == '/about-us/' %} active {% endif %}">
+                <a class="nav-link" href="{% url 'about_us' %}">About us</a>
+            </li>
+            <li class="nav-item {% if request.path == '/contact-us/' %} active {% endif %}">
+                <a class="nav-link" href="{% url 'contact_us' %}">Contact us</a>
+            </li>
+            {% if not user.is_authenticated %}
+            <li class="nav-item {% if request.path == '/accounts/signup/' %} active {% endif %}">
+                <a class="nav-link" href="{% url 'signup' %}?next=/">Signup</a>
+            </li>
+            <li class="nav-item {% if request.path == '/accounts/login/' %} active {% endif %}">
+                <a class="nav-link" href="{% url 'login' %}?next=/">Login</a>
+            </li>
+            {% endif %}
+            <li class="nav-item {% if request.path == '/basket/' %} active {% endif %}">
+                <a class="nav-link" href="{% url 'basket' %}?next=/">Basket</a>
+            </li>
+            <li class="nav-item {% if request.path == '/ebooks/' %} active {% endif %}">
+                <a class="nav-link" href="/ebooks/">Ebooks</a>
+            </li>
+            <li class="nav-item {% if request.path == '/audiobooks/' %} active {% endif %}">
+                <a class="nav-link" href="/audiobooks/">Audiobooks</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item {% if '/ebooks/ebook_viewer' in request.path %} active {% endif %}">
+                <a class="nav-link" href="{% url 'all_ebook_viewer' %}">Purchased Ebooks</a>
+            </li>
+            <li class="nav-item {% if '/audiobooks/audiobook_viewer' in request.path %} active {% endif %}">
+                <a class="nav-link" href="{% url 'all_audiobook_viewer' %}">Purchased Audiobooks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}?next=/">Log out</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+{% endfor %}
+
+<div class="container">
+    {% if request.basket %}
+    <div>
+        {{ request.basket.count }}
+        items in basket
+    </div>
+    {% endif %}
+    {% block content %} {% endblock content %}
+
+    <!-- Footer -->
+    <footer class="d-flex justify-content-center mt-auto">
+        <div class="d-flex justify-content-between col-md-8 col-md-offset-2 mb-3 mt-5">
+            <!-- Copyright Info -->
+            <div class="align-left">
+                <a class="font-weight-bold small kf-blue kf-links" href="#">Home</a> |
+                <a class="font-weight-bold small kf-blue kf-links" href="#">Link2</a> |
+                <a class="font-weight-bold small kf-blue kf-links" href="#">Link3</a>
+            </div>
+            <div class="align-right small">
+                Crafted with Love by <a class="font-weight-bold kf-blue kf-links" href="#" target="">Me</a>
+            </div>
+            <!-- END Copyright Info -->
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% block js %}
+{% endblock js %}
+</body>
+</html>

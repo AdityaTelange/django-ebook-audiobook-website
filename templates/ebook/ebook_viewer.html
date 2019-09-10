@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ ebook.name }}</h3>
+
+{% load static %}
+
+<div class="card" oncontextmenu="return false;" style="pointer-events: none;">
+    {% for img_url in ebook.get_files %}
+    <img class="img-page" src="{% get_media_prefix %}{{ img_url }}">
+    {% endfor %}
+</div>
+{% endblock content %}
