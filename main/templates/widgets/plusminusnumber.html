@@ -1,11 +1,10 @@
 <input
         class="form-control quantity-number"
-        include
         max="10"
         min="1"
         name="{{ widget.name }}"
         type="number"
-        value="{{ widget.value }}" {% "django/forms/widgets/attrs.html" %} />
+        value="{{ widget.value }}" {% include "django/forms/widgets/attrs.html" %} />
 <button
         class="btn btn-default btn-number btn-minus"
         data-field="{{ widget.name }}"

@@ -1,6 +1,7 @@
-# django-ebook-audiobook-website
-
-
+ #**GettinG Started with a Simple Company Site**
+ 
+ `A project from book Practical  Django 2 and Channels 2 `
+ 
  #**Environment Vars**
  
 '#!/bin/sh
