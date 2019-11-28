@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-from envgetter import get_env_variable
+# from envgetter import get_env_variable
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SECRET_KEY = get_env_variable(BASE_DIR, 'SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 ALLOWED_HOSTS = ['booktime.glitch.me', '127.0.0.1']
 
@@ -118,11 +118,11 @@ MEDIA_URL = '/media/'
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST_USER = get_env_variable(BASE_DIR, 'SMTP_USER')
-    EMAIL_HOST = get_env_variable(BASE_DIR, 'SMTP_HOST')
-    EMAIL_PORT = int(get_env_variable(BASE_DIR, 'SMTP_PORT'))
+    EMAIL_HOST_USER = os.getenv('SMTP_USER')
+    EMAIL_HOST = os.getenv('SMTP_HOST')
+    EMAIL_PORT = os.getenv('SMTP_PORT')
     EMAIL_USE_TLS = True
-    EMAIL_HOST_PASSWORD = get_env_variable(BASE_DIR, 'SMTP_PASS')
+    EMAIL_HOST_PASSWORD = os.getenv('SMTP_PASS')
 else:
     EMAIL_BACKEND = (
         "django.core.mail.backends.console.EmailBackend")
