@@ -12,4 +12,6 @@ else
 fi
 cd /app
 pnpm install --reporter silent --prefer-offline --audit false
-npm run-script run --silent#!/bin/bash 
+npm run-script run --silent#!/bin/bash
+
+python3 manage.py runserver
